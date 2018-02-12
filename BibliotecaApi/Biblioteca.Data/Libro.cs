@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Biblioteca.Data
 {
-   public class Libro
+    public partial class Libro : BaseEntity
     {
-        public int IdLibro { get; set; }
+        public int Idlibro { get; set; }
         public string Titulo { get; set; }
-        public DateTime FechaLanzamiento { get; set; }
-        public string Descripcion { get; set; }
-        public string Categoria { get; set; }
+        public int Paginas { get; set; }
+        public int Edicion { get; set; }
+        public int Ejemplares { get; set; }
+        public long Isbn { get; set; }
+        public int IdEditorial { get; set; }
+        public int IdAutor { get; set; }
+        public int IdTema { get; set; }
 
-        //Referencia del objeto Presto 
-        public virtual Prestamo Prestamo { get; set; }
+        public Autor IdAutorNavigation { get; set; }
+        public Editorial IdEditorialNavigation { get; set; }
+        public Tema IdTemaNavigation { get; set; }
     }
 }

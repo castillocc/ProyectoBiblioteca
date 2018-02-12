@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Biblioteca.Data
 {
-    public partial class Autor : BaseEntity
+    public partial class Editorial : BaseEntity
     {
-        public Autor()
+        public Editorial()
         {
             Libro = new HashSet<Libro>();
         }
 
-        public int IdAutor { get; set; }
-        public string NombreAutor { get; set; }
+        public int IdEditorial { get; set; }
+        public string NombreEditorial { get; set; }
 
         public ICollection<Libro> Libro { get; set; }
     }

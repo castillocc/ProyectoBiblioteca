@@ -5,14 +5,13 @@ using System.Text;
 
 namespace Biblioteca.Data
 {
-    public class AutorMap
+    public class TemaMap
     {
-        public AutorMap(EntityTypeBuilder<Autor> entityBuilder) {
-            entityBuilder.HasKey(e => e.IdAutor);
+        public TemaMap(EntityTypeBuilder<Tema> entityBuilder)
+        {
+            entityBuilder.HasKey(e => e.IdTema);
 
-            entityBuilder.Property(e => e.IdAutor).ValueGeneratedNever();
-
-            entityBuilder.Property(e => e.NombreAutor)
+            entityBuilder.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false);

@@ -9,12 +9,27 @@ namespace Biblioteca.Data
     {
         public LibroMap(EntityTypeBuilder<Libro> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.IdLibro);
-            entityBuilder.Property(t => t.Titulo);
-            entityBuilder.Property(t => t.FechaLanzamiento);
-            entityBuilder.Property(t => t.Descripcion);
-            entityBuilder.Property(t => t.Categoria);
+            entityBuilder.HasKey(e => e.Idlibro);
 
-        }
+            entityBuilder.Property(e => e.Isbn);
+
+            entityBuilder.Property(e => e.Titulo)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entityBuilder.HasOne(d => d.IdAutorNavigation)
+                .WithMany(p => p.Libro)
+                .HasForeignKey(d => d.IdAutor);
+
+            entityBuilder.HasOne(d => d.IdEditorialNavigation)
+                .WithMany(p => p.Libro)
+                .HasForeignKey(d => d.IdEditorial);
+
+            entityBuilder.HasOne(d => d.IdTemaNavigation)
+                .WithMany(p => p.Libro)
+                .HasForeignKey(d => d.IdTema);
+
+       }
     }
 }
