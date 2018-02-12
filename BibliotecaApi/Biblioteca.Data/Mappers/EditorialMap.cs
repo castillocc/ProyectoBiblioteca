@@ -8,7 +8,7 @@ namespace Biblioteca.Data.Mapper
 {
     public class EditorialMap
     {
-        public EditorialMap(EntityTypeBuilder<AspNetUserClaims> entityBuilder)
+        public EditorialMap(EntityTypeBuilder<Editorial> entityBuilder)
         {
             entityBuilder.HasKey(e => e.IdEditorial);
 

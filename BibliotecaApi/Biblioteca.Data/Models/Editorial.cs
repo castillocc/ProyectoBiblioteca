@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUserClaims : BaseEntity
+    public partial class Editorial : BaseEntity
     {
-        public AspNetUserClaims()
+        public Editorial()
         {
             Libro = new HashSet<Libro>();
         }
