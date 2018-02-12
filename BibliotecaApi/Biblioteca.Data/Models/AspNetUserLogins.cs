@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUserLogins
+    public partial class AspNetUserLogins : BaseEntity
     {
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }

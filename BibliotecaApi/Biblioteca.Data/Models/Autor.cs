@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Models
 {
     public partial class Autor : BaseEntity
     {

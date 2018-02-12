@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Biblioteca.Data.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Mapper
 {
     public class LibroMap
     {
@@ -30,6 +31,6 @@ namespace Biblioteca.Data
                 .WithMany(p => p.Libro)
                 .HasForeignKey(d => d.IdTema);
 
-       }
+        }
     }
 }

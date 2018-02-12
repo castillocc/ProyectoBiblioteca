@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Models
 {
     public partial class AspNetUsers : BaseEntity
     {

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUserClaims : BaseEntity
+    public partial class AspNetRoleClaims : BaseEntity
     {
         public int Id { get; set; }
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }
-        public string UserId { get; set; }
+        public string RoleId { get; set; }
 
-        public AspNetUsers User { get; set; }
+        public AspNetRoles Role { get; set; }
     }
 }

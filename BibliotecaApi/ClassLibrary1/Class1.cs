@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Biblioteca.Repository
+namespace ClassLibrary1
 {
     public class Class1
     {

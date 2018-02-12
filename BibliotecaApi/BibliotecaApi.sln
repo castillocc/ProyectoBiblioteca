@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaApi", "BibliotecaApi\BibliotecaApi.csproj", "{F9C4346F-896B-4C94-9CD0-C1E9222C7DA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibliotecaApi", "BibliotecaApi\BibliotecaApi.csproj", "{F9C4346F-896B-4C94-9CD0-C1E9222C7DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Data", "Biblioteca.Data\Biblioteca.Data.csproj", "{99BBABF5-9D55-4D63-A3D4-F3DE6C9CD411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Data", "Biblioteca.Data\Biblioteca.Data.csproj", "{99BBABF5-9D55-4D63-A3D4-F3DE6C9CD411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Repository", "Biblioteca.Repository\Biblioteca.Repository.csproj", "{5AAA64A8-0B1A-40F6-B644-C022DC463382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Repository", "Biblioteca.Repository\Biblioteca.Repository.csproj", "{5AAA64A8-0B1A-40F6-B644-C022DC463382}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Service", "Biblioteca.Service\Biblioteca.Service.csproj", "{A39CB8AE-B9B2-4E63-9DAF-E5D512DB805F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Service", "Biblioteca.Service\Biblioteca.Service.csproj", "{A39CB8AE-B9B2-4E63-9DAF-E5D512DB805F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

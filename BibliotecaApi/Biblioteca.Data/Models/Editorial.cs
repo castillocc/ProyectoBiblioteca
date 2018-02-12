@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Biblioteca.Data
+namespace Biblioteca.Data.Models
 {
-    public partial class Editorial : BaseEntity
+    public partial class AspNetUserClaims : BaseEntity
     {
-        public Editorial()
+        public AspNetUserClaims()
         {
             Libro = new HashSet<Libro>();
         }
