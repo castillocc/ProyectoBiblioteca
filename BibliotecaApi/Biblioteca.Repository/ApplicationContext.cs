@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Biblioteca.Repository
 {
-    class ApplicationContext:DbContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -16,7 +16,7 @@ namespace Biblioteca.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //Parte de la biblioteca
+            //configuracio de la biblioteca
             new TemaMap(modelBuilder.Entity<Tema>());
             new EditorialMap(modelBuilder.Entity<Editorial>());
             new AutorMap(modelBuilder.Entity<Autor>());
@@ -24,7 +24,14 @@ namespace Biblioteca.Repository
             new EjemplarMap(modelBuilder.Entity<Ejemplar>());
             new PrestamoMap(modelBuilder.Entity<Prestamo>());
 
-            //
+            //Configuracion de usuario
+            new AspNetRoleClaimsMap(modelBuilder.Entity<AspNetRoleClaims>());
+            new AspNetRolesMap(modelBuilder.Entity<AspNetRoles>());
+            new AspNetUserClaimsMap(modelBuilder.Entity<AspNetUserClaims>());
+            new AspNetUserLoginsMap(modelBuilder.Entity<AspNetUserLogins>());
+            new AspNetUserRolesMap(modelBuilder.Entity<AspNetUserRoles>());
+            new AspNetUserTokensMap(modelBuilder.Entity<AspNetUserTokens>());
+
         }
     }
 }
