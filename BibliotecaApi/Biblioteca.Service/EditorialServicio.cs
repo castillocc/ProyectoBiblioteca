@@ -31,7 +31,7 @@ namespace Biblioteca.Service
             editorialRepository.Insertar(editorial);
         }
 
-        public IEnumerable<Autor> ListarEditoriales()
+        public IEnumerable<Editorial> ListarEditoriales()
         {
             return editorialRepository.ListarTodos();
         }
