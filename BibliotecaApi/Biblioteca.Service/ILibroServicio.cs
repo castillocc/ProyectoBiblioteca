@@ -11,7 +11,7 @@ namespace Biblioteca.Service
         IEnumerable<Libro> ListarLibros);
         Libro ObtenerLibro(int id);
         void InsertarLibro(Libro libro);
-        void ActualizarLibroes(int id,Libro libro);
-        void EliminarLibroes(int id); 
+        void ActualizarLibro(int id,Libro libro);
+        void EliminarLibro(int id); 
     }
 }
