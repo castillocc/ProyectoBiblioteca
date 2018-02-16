@@ -21,7 +21,7 @@ namespace Biblioteca.Repository
             new EditorialMap(modelBuilder.Entity<Editorial>());
             new AutorMap(modelBuilder.Entity<Autor>());
             new LibroMap(modelBuilder.Entity<Libro>());
-           /* new EjemplarMap(modelBuilder.Entity<Ejemplar>());
+            new EjemplarMap(modelBuilder.Entity<Ejemplar>());
             new PrestamoMap(modelBuilder.Entity<Prestamo>());
 
             //Configuracion de usuario
@@ -30,7 +30,7 @@ namespace Biblioteca.Repository
             new AspNetUserClaimsMap(modelBuilder.Entity<AspNetUserClaims>());
             new AspNetUserLoginsMap(modelBuilder.Entity<AspNetUserLogins>());
             new AspNetUserRolesMap(modelBuilder.Entity<AspNetUserRoles>());
-            new AspNetUserTokensMap(modelBuilder.Entity<AspNetUserTokens>());*/
+            new AspNetUserTokensMap(modelBuilder.Entity<AspNetUserTokens>());
 
         }
     }
