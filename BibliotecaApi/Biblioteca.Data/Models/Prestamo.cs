@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Biblioteca.Data.Models
 {
-    public class Prestamo: BaseEntity
+    public class Prestamo
     {
        public int IdPrestamos { get; set; }
         public DateTime FechaPrestamo { get; set; }

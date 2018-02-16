@@ -15,9 +15,9 @@ namespace Biblioteca.Service
             this.autorRepository = _autorRepository;
         }
 
-        public void ActualizarAutor(Autor autor)
+        public void ActualizarAutor(int id,Autor autor)
         {
-            autorRepository.Actualizar(autor);
+            autorRepository.Actualizar(autor,id);
         }
 
         public void EliminarAutor(int id)

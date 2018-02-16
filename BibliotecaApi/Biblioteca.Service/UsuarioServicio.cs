@@ -15,9 +15,9 @@ namespace Biblioteca.Service
             this.usuarioRepository = _usuarioRepository;
         }
 
-        public void ActualizarUsuario(AspNetUsers usuario)
+        public void ActualizarUsuario(int id,AspNetUsers usuario)
         {
-            usuarioRepository.Actualizar(usuario);
+            usuarioRepository.Actualizar(usuario,id);
         }
 
         public void EliminarUsuario(int id)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Biblioteca.Repository
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T :class
     {
         private readonly ApplicationContext context;
         private DbSet<T> entities;
@@ -31,7 +31,7 @@ namespace Biblioteca.Repository
 
         public T ObtenerPorId(int id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return entities.Find(id);
         }
 
         public void Insertar(T entidad)
@@ -44,13 +44,18 @@ namespace Biblioteca.Repository
             context.SaveChanges();
         }
 
-        public void Actualizar(T entidad)
+        public void Actualizar(T entidad,int id)
         {
             if (entidad is null)
             {
                 throw new ArgumentNullException(String.Format(MENSAJE_ERROR_ACTUALIZAR, entidad.ToString()));
             }
-            context.SaveChanges();
+           var entityExist= entities.Find(id);
+            if (entityExist != null) {
+                context.Entry(entityExist).CurrentValues.SetValues(entidad);
+                context.SaveChanges();
+            }
+
         }
 
         public void Eliminar(T entidad)

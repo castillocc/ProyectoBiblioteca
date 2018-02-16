@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUserLogins : BaseEntity
+    public partial class AspNetUserLogins 
     {
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }

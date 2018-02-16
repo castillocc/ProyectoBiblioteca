@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Biblioteca.Data.Models
 {
-    public partial class Libro : BaseEntity
+    public partial class Libro 
     {
         public int Idlibro { get; set; }
         public string Titulo { get; set; }
@@ -16,7 +16,7 @@ namespace Biblioteca.Data.Models
         public int IdTema { get; set; }
 
         public Autor IdAutorNavigation { get; set; }
-        public AspNetUserClaims IdEditorialNavigation { get; set; }
+        public Editorial IdEditorialNavigation { get; set; }
         public Tema IdTemaNavigation { get; set; }
     }
 }

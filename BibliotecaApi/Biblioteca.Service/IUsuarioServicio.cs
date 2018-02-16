@@ -10,7 +10,7 @@ namespace Biblioteca.Service
         IEnumerable<AspNetUsers> ListarUsuarios();
         AspNetUsers ObtenerUsuario(int id);
         void InsertarUsuario(AspNetUsers usuario);
-        void ActualizarUsuario(AspNetUsers usuario);
+        void ActualizarUsuario(int id,AspNetUsers usuario);
         void EliminarUsuario(int id);
     }
 }

@@ -10,7 +10,7 @@ namespace Biblioteca.Service
         IEnumerable<Autor> ListarAutor();
         Autor ObtenerAutor(int id);
         void InsertarAutor(Autor autor);
-        void ActualizarAutor(Autor autor);
+        void ActualizarAutor(int id,Autor autor);
         void EliminarAutor(int id);
     }
 }

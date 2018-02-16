@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+
 
 namespace Biblioteca.Data.Models
 {
-    public partial class Autor : BaseEntity
+    public partial class Autor
     {
         public Autor()
         {
@@ -12,7 +14,7 @@ namespace Biblioteca.Data.Models
 
         public int IdAutor { get; set; }
         public string NombreAutor { get; set; }
-
-        public ICollection<Libro> Libro { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Libro> Libro { get; set; }
     }
 }

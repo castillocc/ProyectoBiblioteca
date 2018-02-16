@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Biblioteca.Data.Models
 {
-    public partial class Editorial : BaseEntity
+    public partial class Editorial 
     {
         public Editorial()
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUsers : BaseEntity
+    public partial class AspNetUsers 
     {
         public AspNetUsers()
         {

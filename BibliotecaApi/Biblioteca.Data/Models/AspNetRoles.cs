@@ -2,7 +2,7 @@
 
 namespace Biblioteca.Data.Models
 {
-    public partial class AspNetRoles : BaseEntity
+    public partial class AspNetRoles 
     {
         public AspNetRoles()
         {

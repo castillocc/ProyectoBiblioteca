@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Biblioteca.Data.Models
 {
-    public class Ejemplar:BaseEntity
+    public class Ejemplar
     {
         public Ejemplar()
         {

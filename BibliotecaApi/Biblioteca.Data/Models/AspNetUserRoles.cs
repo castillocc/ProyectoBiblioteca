@@ -1,7 +1,7 @@
 ﻿
 namespace Biblioteca.Data.Models
 {
-    public partial class AspNetUserRoles : BaseEntity
+    public partial class AspNetUserRoles 
     {
         public string UserId { get; set; }
         public string RoleId { get; set; }
