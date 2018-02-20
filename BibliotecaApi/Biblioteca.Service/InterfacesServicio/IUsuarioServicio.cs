@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biblioteca.Service
+namespace Biblioteca.Service.InterfacesServicio
 {
    public interface IUsuarioServicio
     {

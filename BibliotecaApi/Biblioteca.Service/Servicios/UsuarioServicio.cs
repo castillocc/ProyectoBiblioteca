@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Biblioteca.Data.Models;
 using Biblioteca.Repository;
+using Biblioteca.Service.InterfacesServicio;
 
 namespace Biblioteca.Service
 {

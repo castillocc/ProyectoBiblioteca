@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Biblioteca.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Biblioteca.Data.Models
+namespace Biblioteca.Data.Mapper
 {
     public class AspNetUsersMap
     {
@@ -8,8 +10,10 @@ namespace Biblioteca.Data.Models
         {
             entityBuilder.HasIndex(e => e.NormalizedEmail);
 
+
             entityBuilder.HasIndex(e => e.NormalizedUserName)
-                .IsUnique();
+                .IsUnique(false);
+
 
             entityBuilder.Property(e => e.Id).ValueGeneratedNever();
 
@@ -20,6 +24,12 @@ namespace Biblioteca.Data.Models
             entityBuilder.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
             entityBuilder.Property(e => e.UserName).HasMaxLength(256);
+
+            entityBuilder.Property(e => e.FirstName).HasMaxLength(100)
+            .IsUnicode(false);
+
+            entityBuilder.Property(e => e.LastName).HasMaxLength(100)
+                .IsUnicode(false);
 
         }
     }

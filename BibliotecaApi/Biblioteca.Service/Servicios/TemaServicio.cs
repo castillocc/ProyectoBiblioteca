@@ -1,5 +1,6 @@
 using Biblioteca.Data.Models;
 using Biblioteca.Repository;
+using Biblioteca.Service.InterfacesServicio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,28 +18,28 @@ namespace Biblioteca.Service
 
         public void ActualizarTema(int id,Tema tema)
         {
-            TemaRepository.Actualizar(tema,id);
+            temaRepository.Actualizar(tema,id);
         }
 
         public void EliminarTema(int id)
         {
-            Tema tema = ObtenerAutor(id);
-            TemaRepository.Eliminar(tema);
+            Tema tema = ObtenerTema(id);
+            temaRepository.Eliminar(tema);
         }
 
         public void InsertarTema(Tema tema)
         {
-            TemaRepository.Insertar(tema);
+            temaRepository.Insertar(tema);
         }
 
-        public IEnumerable<Tema> ListarTema()
+        public IEnumerable<Tema> ListarTemas()
         {
-            return TemaRepository.ListarTodos();
+            return temaRepository.ListarTodos();
         }
 
-        public Autor ObtenerTema(int id)
+        public Tema ObtenerTema(int id)
         {
-            return TemaRepository.ObtenerPorId(id);
+            return temaRepository.ObtenerPorId(id);
         }
     }
 }

@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Biblioteca.Data.Models;
-using Biblioteca.Service;
-using Microsoft.AspNetCore.Http;
+﻿using Biblioteca.Data.Models;
+using Biblioteca.Service.InterfacesServicio;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BibliotecaApi.Controllers
 {
     [Produces("application/json")]
-    [Route("BibliotecaApi/Autor")]
+    [Route("Biblioteca/Autor")]
     public class AutorsController : Controller
     {
         private readonly IAutorServicio servicioAutor;
 
-        public AutorsController(IAutorServicio _servicioAutor) {
+        public AutorsController(IAutorServicio _servicioAutor)
+        {
             this.servicioAutor = _servicioAutor;
-         }
+        }
 
         // GET: api/Autor
         [HttpGet]
@@ -54,7 +51,7 @@ namespace BibliotecaApi.Controllers
             return Ok("Autor creado");
 
         }
-        
+
         // PUT: api/Autor/5
         [HttpPut("{id}")]
         public IActionResult ActualizarAutor(int id, [FromBody]Autor autor)
@@ -68,10 +65,10 @@ namespace BibliotecaApi.Controllers
             {
                 return BadRequest();
             }
-            servicioAutor.ActualizarAutor(id,autor);
+            servicioAutor.ActualizarAutor(id, autor);
             return Ok("Autor Actualizado");
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult EliminarAutor(int id)

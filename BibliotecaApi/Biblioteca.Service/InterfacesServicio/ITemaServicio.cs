@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biblioteca.Service
+namespace Biblioteca.Service.InterfacesServicio
 {
     public interface ITemaServicio
     {
-        IEnumerable<Tema> ListarTemas);
+        IEnumerable<Tema> ListarTemas();
         Tema ObtenerTema(int id);
         void InsertarTema(Tema tema);
         void ActualizarTema(int id,Tema tema);

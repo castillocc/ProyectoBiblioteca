@@ -1,10 +1,11 @@
 using Biblioteca.Data.Models;
 using Biblioteca.Repository;
+using Biblioteca.Service.InterfacesServicio;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Biblioteca.Service
+
+namespace Biblioteca.Service.Servicio
 {
     public class LibroServicio:ILibroServicio
     {
@@ -22,7 +23,7 @@ namespace Biblioteca.Service
 
         public void EliminarLibro(int id)
         {
-            Libro libro = ObtenerAutor(id);
+            Libro libro = ObtenerLibro(id);
             libroRepository.Eliminar(libro);
         }
 
@@ -31,12 +32,12 @@ namespace Biblioteca.Service
             libroRepository.Insertar(libro);
         }
 
-        public IEnumerable<Libro> ListarLibro()
+        public IEnumerable<Libro> ListarLibros()
         {
             return libroRepository.ListarTodos();
         }
 
-        public Autor ObtenerLibro(int id)
+        public Libro ObtenerLibro(int id)
         {
             return libroRepository.ObtenerPorId(id);
         }

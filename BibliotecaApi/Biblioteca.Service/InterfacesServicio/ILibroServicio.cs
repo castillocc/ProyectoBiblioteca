@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biblioteca.Service
+namespace Biblioteca.Service.InterfacesServicio
 {
     public interface ILibroServicio
     {
-        IEnumerable<Libro> ListarLibros);
+        IEnumerable<Libro> ListarLibros();
         Libro ObtenerLibro(int id);
         void InsertarLibro(Libro libro);
         void ActualizarLibro(int id,Libro libro);

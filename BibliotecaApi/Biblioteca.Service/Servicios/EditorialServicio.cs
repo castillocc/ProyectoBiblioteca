@@ -1,5 +1,6 @@
 using Biblioteca.Data.Models;
 using Biblioteca.Repository;
+using Biblioteca.Service.InterfacesServicio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Biblioteca.Service
 
         public void EliminarEditorial(int id)
         {
-            Editorial editorial = ObtenerAutor(id);
+            Editorial editorial = ObtenerEditorial(id);
             editorialRepository.Eliminar(editorial);
         }
 
@@ -36,7 +37,7 @@ namespace Biblioteca.Service
             return editorialRepository.ListarTodos();
         }
 
-        public Autor ObtenerEditorial(int id)
+        public Editorial ObtenerEditorial(int id)
         {
             return editorialRepository.ObtenerPorId(id);
         }
