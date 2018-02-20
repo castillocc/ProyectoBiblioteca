@@ -1,16 +1,20 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using System.Threading.Tasks;
 using Biblioteca.Data.Models;
 using Biblioteca.Repository;
 using Biblioteca.Service;
 using Biblioteca.Service.InterfacesServicio;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BibliotecaApi
 {
@@ -31,34 +35,27 @@ namespace BibliotecaApi
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaContext")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IAutorServicio), typeof(AutorServicio));
+            services.AddTransient(typeof(IUsuarioServicio), typeof(UsuarioServicio));
             services.AddIdentity<AspNetUsers, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>()
              .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
+            //JWT autenticacion.
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication(options=>
             {
-                // Password settings
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.AllowedForNewUsers = true;
-                // User settings
-                options.User.RequireUniqueEmail = true;
-            });
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Events.OnRedirectToLogin= ctx=>
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+            ).AddJwtBearer(cfg=> {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
                 {
-                    if (ctx.Request.Path.StartsWithSegments("/Biblioteca"))
-                    {
-                        ctx.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
-                    }
-
-                    return Task.FromResult(0);
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
+                    ClockSkew = TimeSpan.Zero // remove delay of token when expire
                 };
             });
 
