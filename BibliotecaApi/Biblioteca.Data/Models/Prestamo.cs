@@ -14,7 +14,7 @@ namespace Biblioteca.Data.Models
         public int? IdEjemplar { get; set; }
 
         public Ejemplar Ejemplar { get; set; }
-        public AspNetUsers Usuario { get; set; }
+    //    public AspNetUsers Usuario { get; set; }
     }
 
 }

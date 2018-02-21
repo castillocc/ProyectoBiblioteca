@@ -22,19 +22,19 @@ namespace BibliotecaApi.Controllers
     public class CuentaController : Controller
     {
 
-        private readonly IUsuarioServicio servicioUsuario;
-        private readonly UserManager<AspNetUsers> userManager;
-        private readonly SignInManager<AspNetUsers> signInManager;
+        //private readonly IUsuarioServicio servicioUsuario;
+        private readonly UserManager<Usuario> userManager;
+        private readonly SignInManager<Usuario> signInManager;
         private readonly IConfiguration configuration;
 
-        public CuentaController(UserManager<AspNetUsers> userManager,SignInManager<AspNetUsers> signInManager, 
-            IConfiguration configuration, IUsuarioServicio servicioUsuario)
+        public CuentaController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager, 
+            IConfiguration configuration)
         {
             // this.servicioUsuario = servicioUsuario;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
-            this.servicioUsuario = servicioUsuario;
+            //this.servicioUsuario = servicioUsuario;
         }
 
         // POST: Biblioteca/Cuenta
@@ -46,9 +46,9 @@ namespace BibliotecaApi.Controllers
             {
                 return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(modelError => modelError.ErrorMessage).ToList());
             }
-            var user = new AspNetUsers
+            var user = new Usuario
             {
-                UserName = usuario.UserName,
+                UserName = usuario.Email,
                 Email = usuario.Email,
                 FirstName = usuario.FirstName,
                 LastName = usuario.LastName
@@ -68,18 +68,19 @@ namespace BibliotecaApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            var resultado = await signInManager.SignInAsync(model.Email,model.Clave,false);
-           // var x = await signInManager.p(model.Email, model.Clave, false, false);
-            if (resultado.Succeeded)
+            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+            if (result.Succeeded)
             {
-                var appUser = userManager.FindByEmailAsync(model.Email).Result;
+                var appUser = userManager.Users.SingleOrDefault(r => r.Email == model.Email);
+                return new OkObjectResult(appUser);
                // return await GenerateJwtToken(model.Email, appUser);
             }
 
-            return BadRequest("Error al loguiar");
+            return new BadRequestObjectResult(result);
         }
 
-        private async Task<object> GenerateJwtToken(string email, AspNetUsers user)
+        private async Task<object> GenerateJwtToken(string email, Usuario user)
         {
             var claims = new List<Claim>
             {

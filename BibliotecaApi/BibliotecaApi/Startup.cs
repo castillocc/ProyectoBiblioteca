@@ -33,11 +33,12 @@ namespace BibliotecaApi
             services.AddCors();
             services.AddMvc();
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaContext")));
+            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IAutorServicio), typeof(AutorServicio));
-            services.AddTransient(typeof(IUsuarioServicio), typeof(UsuarioServicio));
-            services.AddIdentity<AspNetUsers, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>()
-             .AddDefaultTokenProviders();
+           
+            
 
             //JWT autenticacion.
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();

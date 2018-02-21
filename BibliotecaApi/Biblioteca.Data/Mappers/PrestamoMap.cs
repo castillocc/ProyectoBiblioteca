@@ -27,9 +27,9 @@ namespace Biblioteca.Data.Mapper
                 .WithMany(p => p.Prestamo)
                 .HasForeignKey(d => d.IdEjemplar);
 
-            entityBuilder.HasOne(d => d.Usuario)
+            /*entityBuilder.HasOne(d => d.Usuario)
                 .WithMany(p => p.Prestamo)
-                .HasForeignKey(d => d.IdUsuario);
+                .HasForeignKey(d => d.IdUsuario);*/
         }
     }
 }
