@@ -1,7 +1,9 @@
 ﻿using Biblioteca.Data.Models;
 using Biblioteca.Service.InterfacesServicio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BibliotecaApi.Controllers
 {
@@ -9,29 +11,27 @@ namespace BibliotecaApi.Controllers
     [Route("Biblioteca/Autor")]
     public class AutorsController : Controller
     {
-        private readonly IAutorServicio servicioAutor;
+        private readonly IAutorServicio servicio;
 
-        public AutorsController(IAutorServicio _servicioAutor)
+        public AutorsController(IAutorServicio servicioAutor)
         {
-            this.servicioAutor = _servicioAutor;
+            this.servicio = servicioAutor;
         }
 
-        // GET: api/Autor
+        // GET: Biblioteca/Autor
         [HttpGet]
+        [Authorize]
         public IEnumerable<Autor> ListarAutores()
         {
-            return servicioAutor.ListarAutor();
+            return servicio.ListarAutor();
         }
 
-        // GET: api/Autor/5
-        [HttpGet("{id}", Name = "ObtenerAutorPorId")]
+        // GET: Biblioteca/Autor/ObtenerAutorPorId/5
+        [Authorize]
+        [HttpGet("{id}", Name = "ObtenerPorId")]
         public IActionResult ObtenerAutorPorId([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var autor = servicioAutor.ObtenerAutor(id);
+            var autor = servicio.ObtenerAutor(id);
             if (autor == null)
             {
                 return NotFound("Autor no encontrado");
@@ -39,45 +39,44 @@ namespace BibliotecaApi.Controllers
             return Ok(autor);
         }
 
-        // POST: api/Autor
+        // POST: Biblioteca/Autor
+        [Authorize]
         [HttpPost]
         public ActionResult PostAutor([FromBody]Autor autor)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(modelError => modelError.ErrorMessage).ToList());
             }
-            servicioAutor.InsertarAutor(autor);
+            servicio.InsertarAutor(autor);
             return Ok("Autor creado");
 
         }
 
-        // PUT: api/Autor/5
+        // PUT: Biblioteca/Autor/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult ActualizarAutor(int id, [FromBody]Autor autor)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState.Values.SelectMany(v => v.Errors).Select(modelError => modelError.ErrorMessage).ToList());
             }
 
             if (id != autor.IdAutor)
             {
                 return BadRequest();
             }
-            servicioAutor.ActualizarAutor(id, autor);
+            servicio.ActualizarAutor(id, autor);
             return Ok("Autor Actualizado");
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: Biblioteca/ApiWithActions/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult EliminarAutor(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            servicioAutor.EliminarAutor(id);
+            servicio.EliminarAutor(id);
             return Ok("Autor eliminado");
 
         }

@@ -30,36 +30,33 @@ namespace BibliotecaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddMvc();
+            //Se agrega los contextos de datos y el servicio de la seguridad
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BibliotecaContext")));
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
+            //Servicios 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IAutorServicio), typeof(AutorServicio));
-           
-            
+            services.AddTransient(typeof(ITemaServicio), typeof(TemaServicio));
+
 
             //JWT autenticacion.
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            services.AddAuthentication(options=>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }
-            ).AddJwtBearer(cfg=> {
-                cfg.RequireHttpsMetadata = false;
-                cfg.SaveToken = true;
-                cfg.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
-                    ClockSkew = TimeSpan.Zero // remove delay of token when expire
-                };
-            });
-
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                        .AddJwtBearer(cfg =>
+                        {
+                            cfg.RequireHttpsMetadata = false;
+                            cfg.SaveToken = true;
+                            cfg.TokenValidationParameters = new TokenValidationParameters
+                            {
+                                ValidateLifetime = true,
+                                ValidateIssuerSigningKey = true,
+                                ValidIssuer = Configuration["Jwt:Issuer"],
+                                ValidAudience = Configuration["Jwt:Issuer"],
+                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                            };
+                        });
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +66,7 @@ namespace BibliotecaApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

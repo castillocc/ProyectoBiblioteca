@@ -27,7 +27,7 @@ namespace BibliotecaApi.Controllers
         private readonly SignInManager<Usuario> signInManager;
         private readonly IConfiguration configuration;
 
-        public CuentaController(UserManager<Usuario> userManager,SignInManager<Usuario> signInManager, 
+        public CuentaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
             IConfiguration configuration)
         {
             // this.servicioUsuario = servicioUsuario;
@@ -73,32 +73,29 @@ namespace BibliotecaApi.Controllers
             if (result.Succeeded)
             {
                 var appUser = userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return new OkObjectResult(appUser);
-               // return await GenerateJwtToken(model.Email, appUser);
+                var token = GenerarTokenJWT(model.Email, appUser);
+                return new OkObjectResult(token);
             }
 
             return new BadRequestObjectResult(result);
         }
 
-        private async Task<object> GenerateJwtToken(string email, Usuario user)
+        private string GenerarTokenJWT(string email, Usuario user)
         {
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            //var expires = DateTime.Now.AddDays(Convert.ToDouble(configuration["JwtExpireDays"]));
+               {
+                   new Claim(JwtRegisteredClaimNames.Sub, email),
+                   new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                   new Claim(ClaimTypes.NameIdentifier, user.Id)
+               };
 
             var token = new JwtSecurityToken(
-                configuration["Jwt:Issuer"],
-                configuration["Jwt:Issuer"],
-                claims,
-               // expires: expires,
-                signingCredentials: creds
+          issuer: configuration["Jwt:Issuer"],
+          claims: claims,
+          expires: DateTime.UtcNow.AddDays(60),
+         notBefore: DateTime.UtcNow,
+         signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+                 SecurityAlgorithms.HmacSha256)
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);

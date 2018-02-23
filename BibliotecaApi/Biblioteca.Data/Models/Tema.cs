@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Data.Models
 {
@@ -11,6 +12,7 @@ namespace Biblioteca.Data.Models
         }
 
         public int IdTema { get; set; }
+        [Required(ErrorMessage ="La descripcion es requerida")]
         public string Descripcion { get; set; }
 
         public ICollection<Libro> Libro { get; set; }
