@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Data.Models;
 using Biblioteca.Service.InterfacesServicio;
+using BibliotecaApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -28,8 +29,8 @@ namespace BibliotecaApi.Controllers
 
         // GET: Biblioteca/Autor/ObtenerAutorPorId/5
         [Authorize]
-        [HttpGet("{id}", Name = "ObtenerPorId")]
-        public IActionResult ObtenerAutorPorId([FromRoute] int id)
+        [HttpGet("{id}", Name = "ObtenerAutorPorId")]
+        public IActionResult ObtenerAutorPorId([FromRoute]int id)
         {
             var autor = servicio.ObtenerAutor(id);
             if (autor == null)

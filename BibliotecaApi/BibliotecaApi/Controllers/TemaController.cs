@@ -27,7 +27,7 @@ namespace BibliotecaBiblioteca.Controllers
         }
 
         // GET: Biblioteca/Tema/5
-        [HttpGet("{id}", Name = "ObtenerPorId")]
+        [HttpGet("{id}", Name = "ObtenerTemaPorId")]
         public IActionResult ObtenerTemaPorId(int id)
         {
             var tema = servicio.ObtenerTema(id);

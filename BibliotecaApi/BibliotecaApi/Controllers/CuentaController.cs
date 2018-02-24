@@ -9,6 +9,7 @@ using Biblioteca.Data.Models;
 using Biblioteca.Service.InterfacesServicio;
 using BibliotecaApi.Helpers;
 using BibliotecaApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,24 +22,23 @@ namespace BibliotecaApi.Controllers
     [Route("Biblioteca/Cuenta")]
     public class CuentaController : Controller
     {
-
-        //private readonly IUsuarioServicio servicioUsuario;
         private readonly UserManager<Usuario> userManager;
         private readonly SignInManager<Usuario> signInManager;
         private readonly IConfiguration configuration;
 
         public CuentaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
-            IConfiguration configuration)
+           RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
-            // this.servicioUsuario = servicioUsuario;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
-            //this.servicioUsuario = servicioUsuario;
+
         }
 
+        #region Controladores
         // POST: Biblioteca/Cuenta
         [HttpPost]
+        [AllowAnonymous]
         [Route("Registro")]
         public async Task<IActionResult> Post([FromBody]RegistroViewModel usuario)
         {
@@ -64,8 +64,8 @@ namespace BibliotecaApi.Controllers
             return new OkObjectResult("usuario creado");
 
         }
-
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
@@ -80,6 +80,8 @@ namespace BibliotecaApi.Controllers
             return new BadRequestObjectResult(result);
         }
 
+        #endregion
+        #region Metodos Privados
         private string GenerarTokenJWT(string email, Usuario user)
         {
             var claims = new List<Claim>
@@ -100,6 +102,6 @@ namespace BibliotecaApi.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
+        #endregion
     }
 }

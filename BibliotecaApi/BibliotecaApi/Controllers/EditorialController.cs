@@ -26,7 +26,7 @@ namespace BibliotecaBiblioteca.Controllers
         }
 
         // GET: Biblioteca/Editorial/5
-        [HttpGet("{id}", Name = "ObtenerPorId")]
+        [HttpGet("{id}", Name = "ObtenerEditorialPorId")]
         public IActionResult ObtenerEditorialPorId(int id)
         {
             var editorial = servicio.ObtenerEditorial(id);

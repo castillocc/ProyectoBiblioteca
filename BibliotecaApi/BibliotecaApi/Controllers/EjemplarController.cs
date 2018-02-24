@@ -26,7 +26,7 @@ namespace BibliotecaApi.Controllers
         }
 
         // GET: api/Ejemplar/5
-        [HttpGet("{id}", Name = "ObtenerPorId")]
+        [HttpGet("{id}", Name = "ObtenerEjemplarPorId")]
         public IActionResult ObtenerEjemplarPorId(int id)
         {
             var ejemplar = servicio.ObtenerEjemplar(id);
