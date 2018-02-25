@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/bootswatch/darkly/bootstrap.min.css"
+        "../node_modules/bootswatch/cerulean/bootstrap.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

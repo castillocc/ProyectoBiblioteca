@@ -1,3 +1,23 @@
-<p>
-  login works!
-</p>
+<div class="login-form">
+<form>
+<h2 class="text-center">Ingreso al sistema</h2>
+<div class="form-group">
+  <label for="email" class="col-sm-2 col-form-label">Correo</label>
+  <input type="text" class="form-control" placeholder="Correo" required="required" id="email">
+</div>
+<div class="form-group">
+    <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+  <input type="password"id="password" class="form-control" placeholder="Contraseña" required="required">
+</div>
+<div class="form-group">
+<button type="button" class="btn btn-primary btn-block" ng-click="click()">
+  Ingresar
+</button>
+</div>
+<div class="clearfix">
+    <label class="pull-left checkbox-inline"><input type="checkbox"> Recordar?</label>
+    <a href="#" class="pull-right">Olvido su clave?</a>
+</div>    
+<p class="text-center"><a href="#">Crear cuenta</a></p>    
+</form>
+</div> 
