@@ -80,7 +80,7 @@ namespace BibliotecaApi.Controllers
             }
             return Ok("El rol se ha elimnado exitosamente");
         }
-
+   
         #region ConfiguracionRolUsuario
         //Esta seccion se encarga de manejar todas las peticiones para actualizar los roles con los que cuenta un usuario
         [HttpPost("AgregarRolUsuario")]
