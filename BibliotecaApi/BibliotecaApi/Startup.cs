@@ -56,6 +56,14 @@ namespace BibliotecaApi
                                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                             };
                         });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFromAll",
+                    builder => builder
+                    .WithMethods("GET", "POST")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader());
+            });
             services.AddMvc();
         }
 
@@ -67,6 +75,7 @@ namespace BibliotecaApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
+            app.UseCors("AllowFromAll");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

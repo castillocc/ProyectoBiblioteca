@@ -73,9 +73,9 @@ namespace BibliotecaApi.Controllers
             if (result.Succeeded)
             {
                 var appUser = userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                appUser.id
                 var token = GenerarTokenJWT(model.Email, appUser);
-                return new OkObjectResult(token);
+                return new OkObjectResult(appUser);
+                // return new OkObjectResult(token);
             }
 
             return new BadRequestObjectResult(result);
