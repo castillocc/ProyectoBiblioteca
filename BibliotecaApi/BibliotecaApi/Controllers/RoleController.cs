@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Biblioteca.Data.Models;
 using BibliotecaApi.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace BibliotecaApi.Controllers
 {
@@ -52,7 +51,7 @@ namespace BibliotecaApi.Controllers
             {
                 return BadRequest(String.Format("El rol {0}no se encuentra creado", model.NombreRol));
             }
-            var roleUpdate =  roleManager.FindByNameAsync(role).Result;
+            var roleUpdate = roleManager.FindByNameAsync(role).Result;
             roleUpdate.Name = model.NombreRol;
             var result = await roleManager.UpdateAsync(roleUpdate);
             if (!result.Succeeded)
@@ -80,7 +79,7 @@ namespace BibliotecaApi.Controllers
             }
             return Ok("El rol se ha elimnado exitosamente");
         }
-   
+
         #region ConfiguracionRolUsuario
         //Esta seccion se encarga de manejar todas las peticiones para actualizar los roles con los que cuenta un usuario
         [HttpPost("AgregarRolUsuario")]
